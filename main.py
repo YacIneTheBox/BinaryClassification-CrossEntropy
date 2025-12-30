@@ -1,29 +1,51 @@
 """
 Script principal pour exécuter le projet de classification binaire
 """
+
 import numpy as np
+
+from metrics import (
+    compute_likelihood,
+    compute_metrics_for_beta1_range,
+    compute_negative_log_likelihood,
+)
 from model import ShallowNeuralNetwork
-from metrics import (compute_likelihood, compute_negative_log_likelihood, 
-                     compute_metrics_for_beta1_range)
-from visualization import plot_sigmoid_output, plot_likelihood_and_nll
+from visualization import plot_likelihood_and_nll, plot_sigmoid_output
 
 
 def main():
     """Fonction principale du projet"""
 
-    print("="*60)
+    print("=" * 60)
     print("PROJET: Classification binaire et entropie croisée")
-    print("="*60)
+    print("=" * 60)
 
-    x_train = np.array([
-        0.09291784, 0.46809093, 0.93089486, 0.67612654, 0.73441752,
-        0.86847339, 0.49873225, 0.51083168, 0.18343972, 0.99380898,
-        0.27840809, 0.38028817, 0.12055708, 0.56715537, 0.92005746,
-        0.77072270, 0.85278176, 0.05315950, 0.87168699, 0.58858043
-    ])
+    x_train = np.array(
+        [
+            0.09291784,
+            0.46809093,
+            0.93089486,
+            0.67612654,
+            0.73441752,
+            0.86847339,
+            0.49873225,
+            0.51083168,
+            0.18343972,
+            0.99380898,
+            0.27840809,
+            0.38028817,
+            0.12055708,
+            0.56715537,
+            0.92005746,
+            0.77072270,
+            0.85278176,
+            0.05315950,
+            0.87168699,
+            0.58858043,
+        ]
+    )
 
-    y_train = np.array([0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 
-                        0, 1, 0, 1, 1, 0, 1, 0, 1, 1])
+    y_train = np.array([0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1])
 
     beta0 = [0.3, -1.0, -0.5]
     omega0 = [-1.0, 1.8, 0.65]
@@ -72,13 +94,13 @@ def main():
     print("-" * 60)
     plot_likelihood_and_nll(beta1_range, likelihoods, nlls)
 
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("CONCLUSION:")
-    print("="*60)
+    print("=" * 60)
     print(f"Le likelihood est maximisé à β₁ = {optimal_beta1_lik:.4f}")
     print(f"Le NLL est minimisé à β₁ = {optimal_beta1_nll:.4f}")
     print("Ces deux valeurs sont identiques, confirmant la théorie!")
-    print("="*60)
+    print("=" * 60)
 
 
 if __name__ == "__main__":
