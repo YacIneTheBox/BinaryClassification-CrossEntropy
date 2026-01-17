@@ -1,6 +1,7 @@
 """
 Module pour calculer les métriques: likelihood et negative log-likelihood
 """
+
 import numpy as np
 
 
@@ -26,7 +27,7 @@ def compute_likelihood(model, x_train, y_train):
         if y_train[i] == 1:
             likelihood *= p
         else:
-            likelihood *= (1 - p)
+            likelihood *= 1 - p
 
     return likelihood
 
@@ -51,8 +52,7 @@ def compute_negative_log_likelihood(model, x_train, y_train):
     probabilities = np.clip(probabilities, epsilon, 1 - epsilon)
 
     nll = -np.sum(
-        y_train * np.log(probabilities) + 
-        (1 - y_train) * np.log(1 - probabilities)
+        y_train * np.log(probabilities) + (1 - y_train) * np.log(1 - probabilities)
     )
 
     return nll
